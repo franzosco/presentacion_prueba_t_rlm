@@ -1,0 +1,852 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Courier+Prime:wght@400;700&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;600;700&family=Kalam:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&family=Pangolin&family=Patrick+Hand&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-chi: #f59e0b;
+  --primary-chi-glow: rgba(245, 158, 11, 0.35);
+  --primary-student: #38bdf8;
+  --primary-student-glow: rgba(56, 189, 248, 0.35);
+  --bg-dark: #070b14;
+  --card-bg: rgba(15, 23, 42, 0.78);
+  --border-glass: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-dark);
+  color: #f8fafc;
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba(245, 158, 11, 0.10) 0%, transparent 42%),
+    radial-gradient(circle at 88% 22%, rgba(56, 189, 248, 0.10) 0%, transparent 42%),
+    radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.09) 0%, transparent 48%),
+    radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.65) 0%, transparent 100%);
+}
+
+/* ==========================================================================
+   TEMA 1 (DEFAULT): CYBER DARK / GLASSMORPHISM REFINADO
+   ========================================================================== */
+.glass-panel {
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 
+    0 10px 32px -4px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Slide Transition Engine */
+.slide-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 8rem);
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.97) translateY(12px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.4s;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2.5rem;
+  overflow-y: auto;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Micro-animaciones en elementos hijos */
+.slide.active .animate-fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glowing text */
+.text-glow {
+  text-shadow: 0 0 28px rgba(245, 158, 11, 0.45);
+}
+.text-glow-student {
+  text-shadow: 0 0 28px rgba(56, 189, 248, 0.45);
+}
+
+/* Subtle pulse */
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(236, 72, 153, 0.6));
+  }
+}
+
+/* Math / Formula styling */
+.formula-box {
+  background: rgba(9, 14, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45), 0 6px 16px -4px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.katex {
+  font-size: 1.05em !important;
+}
+
+.katex-display {
+  margin: 0.35em 0 !important;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* Dropdown de Temas */
+#theme-dropdown-menu {
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
+/* ==========================================================================
+   TEMA 2: SOBRIO CLARO (EDITORIAL ACADÉMICO / OXFORD PAPER)
+   Tipografía: 'Fraunces' (Serif Académica) + 'Plus Jakarta Sans'
+   ========================================================================== */
+html.theme-light body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  background-color: #f4f6f9 !important;
+  color: #1e293b !important;
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(30, 58, 138, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(180, 83, 9, 0.04) 0%, transparent 50%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%) !important;
+}
+
+html.theme-light h1,
+html.theme-light h2,
+html.theme-light h3 {
+  font-family: 'Fraunces', Georgia, serif !important;
+  letter-spacing: -0.02em !important;
+  color: #0f172a !important;
+}
+
+html.theme-light h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+html.theme-light header {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-bottom: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.05) !important;
+}
+
+html.theme-light .unamba-logo-box,
+html.theme-notebook .unamba-logo-box {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+html.theme-light footer {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-top: 1px solid #cbd5e1 !important;
+  box-shadow: 0 -2px 12px rgba(15, 23, 42, 0.05) !important;
+}
+
+html.theme-light .glass-panel {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 14px !important;
+  box-shadow: 
+    0 6px 20px -4px rgba(15, 23, 42, 0.06),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04) !important;
+  color: #1e293b !important;
+}
+
+html.theme-light .glass-panel-hover:hover {
+  transform: translateY(-3px);
+  border-color: #94a3b8 !important;
+  box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.12) !important;
+}
+
+html.theme-light .formula-box {
+  background: #f8fafc !important;
+  border: 1px solid #94a3b8 !important;
+  border-left: 4px solid #1e3a8a !important;
+  color: #0f172a !important;
+  box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+html.theme-light [class*="bg-slate-9"],
+html.theme-light [class*="bg-slate-8"] {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+/* Cajas de alerta coloreadas en modo claro */
+html.theme-light [class*="bg-amber-9"],
+html.theme-light [class*="bg-amber-500/"] {
+  background-color: #fef3c7 !important;
+  border-color: #f59e0b !important;
+  color: #78350f !important;
+}
+
+html.theme-light [class*="bg-emerald-9"],
+html.theme-light [class*="bg-emerald-500/"] {
+  background-color: #d1fae5 !important;
+  border-color: #10b981 !important;
+  color: #064e3b !important;
+}
+
+html.theme-light [class*="bg-rose-9"],
+html.theme-light [class*="bg-rose-500/"] {
+  background-color: #ffe4e6 !important;
+  border-color: #f43f5e !important;
+  color: #881337 !important;
+}
+
+html.theme-light [class*="bg-purple-9"],
+html.theme-light [class*="bg-indigo-9"],
+html.theme-light [class*="bg-blue-9"],
+html.theme-light [class*="bg-sky-9"] {
+  background-color: #e0e7ff !important;
+  border-color: #6366f1 !important;
+  color: #1e1b4b !important;
+}
+
+html.theme-light svg text[fill="#cbd5e1"],
+html.theme-light svg text[fill="#94a3b8"] {
+  fill: #1e293b !important;
+}
+
+/* Ajuste de colores de texto para máximo contraste sobre fondo claro */
+html.theme-light .text-white,
+html.theme-light .text-slate-100,
+html.theme-light .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html.theme-light .text-slate-300 {
+  color: #334155 !important;
+}
+
+html.theme-light .text-slate-400,
+html.theme-light .text-slate-500 {
+  color: #475569 !important;
+}
+
+html.theme-light .text-amber-300,
+html.theme-light .text-amber-400 {
+  color: #b45309 !important;
+}
+
+html.theme-light .text-sky-300,
+html.theme-light .text-sky-400,
+html.theme-light .text-blue-300,
+html.theme-light .text-blue-400 {
+  color: #0369a1 !important;
+}
+
+html.theme-light .text-emerald-200,
+html.theme-light .text-emerald-300,
+html.theme-light .text-emerald-400 {
+  color: #047857 !important;
+}
+
+html.theme-light .text-rose-300,
+html.theme-light .text-rose-400 {
+  color: #be123c !important;
+}
+
+html.theme-light .text-purple-300,
+html.theme-light .text-purple-400,
+html.theme-light .text-indigo-300,
+html.theme-light .text-indigo-400 {
+  color: #4338ca !important;
+}
+
+/* Títulos con gradiente en modo claro */
+html.theme-light .bg-clip-text.text-transparent {
+  background-image: linear-gradient(135deg, #1e3a8a 0%, #b45309 60%, #be123c 100%) !important;
+  text-shadow: none !important;
+}
+
+/* Cajas de alerta coloreadas en modo claro */
+html.theme-light .bg-amber-950\/20,
+html.theme-light .bg-amber-950\/30,
+html.theme-light .bg-amber-900\/60 {
+  background-color: #fef3c7 !important;
+  border-color: #f59e0b !important;
+  color: #78350f !important;
+}
+
+html.theme-light .bg-emerald-950,
+html.theme-light .bg-emerald-950\/30,
+html.theme-light .bg-emerald-950\/40,
+html.theme-light .bg-emerald-950\/50 {
+  background-color: #d1fae5 !important;
+  border-color: #10b981 !important;
+  color: #064e3b !important;
+}
+
+html.theme-light .bg-rose-950\/20,
+html.theme-light .bg-rose-950\/30,
+html.theme-light .bg-rose-950\/40 {
+  background-color: #ffe4e6 !important;
+  border-color: #f43f5e !important;
+  color: #881337 !important;
+}
+
+html.theme-light .bg-purple-950\/40,
+html.theme-light .bg-indigo-950\/30,
+html.theme-light .bg-blue-900\/60 {
+  background-color: #e0e7ff !important;
+  border-color: #6366f1 !important;
+  color: #1e1b4b !important;
+}
+
+html.theme-light .katex,
+html.theme-light .katex-display {
+  color: #0f172a !important;
+}
+
+html.theme-light #theme-dropdown-menu {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.15) !important;
+}
+html.theme-light .theme-opt-btn:hover {
+  background-color: #f1f5f9 !important;
+}
+
+
+/* ==========================================================================
+   TEMA 3: CUADERNO DE APUNTES (HOJA CUADRICULADA & TINTA DE LAPICEROS)
+   Tipografía: 'Caveat' (Títulos en Pluma) + 'Patrick Hand' (Letra Manuscrita)
+               + 'Courier Prime' (Números de Laboratorio)
+   ========================================================================== */
+html.theme-notebook body {
+  font-family: 'Patrick Hand', 'Kalam', cursive, sans-serif !important;
+  font-size: 1.06rem !important;
+  background-color: #fdfbf4 !important;
+  color: #1e3a8a !important; /* Tinta de lapicero azul Bic */
+  /* Doble margen rojo vertical izquierdo + cuadrícula milimétrica azul */
+  background-image: 
+    linear-gradient(90deg, transparent 44px, rgba(220, 38, 38, 0.4) 44px, rgba(220, 38, 38, 0.4) 46px, transparent 46px, transparent 50px, rgba(220, 38, 38, 0.25) 50px, rgba(220, 38, 38, 0.25) 51px, transparent 51px),
+    linear-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 22px 22px, 22px 22px !important;
+}
+
+/* Títulos manuscritos con pluma estilográfica */
+html.theme-notebook h1,
+html.theme-notebook h2 {
+  font-family: 'Caveat', 'Kalam', cursive !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+  color: #172554 !important;
+  line-height: 1.08 !important;
+}
+
+html.theme-notebook h3,
+html.theme-notebook h4 {
+  font-family: 'Kalam', cursive !important;
+  font-weight: 700 !important;
+  color: #1e3a8a !important;
+}
+
+html.theme-notebook .font-mono {
+  font-family: 'Courier Prime', monospace !important;
+  font-weight: 700 !important;
+}
+
+/* Cabecera y pie estilo lomo de libreta */
+html.theme-notebook header {
+  background: #f5eedc !important;
+  border-bottom: 2.5px solid #1e3a8a !important;
+  box-shadow: 0 3px 0px rgba(30, 58, 138, 0.12) !important;
+}
+
+html.theme-notebook footer {
+  background: #f5eedc !important;
+  border-top: 2.5px solid #1e3a8a !important;
+  box-shadow: 0 -3px 0px rgba(30, 58, 138, 0.12) !important;
+}
+
+/* Tarjetas dibujadas a mano con lapicero */
+html.theme-notebook .glass-panel {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 2px solid #1e3a8a !important;
+  /* Bordes orgánicos estilo trazo a mano alzada */
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px !important;
+  box-shadow: 4px 4px 0px rgba(30, 58, 138, 0.18) !important;
+  color: #1e293b !important;
+}
+
+html.theme-notebook .glass-panel-hover:hover {
+  transform: translateY(-2px) rotate(-0.4deg) !important;
+  box-shadow: 6px 6px 0px rgba(220, 38, 38, 0.22) !important;
+  border-color: #dc2626 !important;
+}
+
+/* Cajas de fórmulas estilo Nota Post-it Amarilla pegada en el cuaderno */
+html.theme-notebook .formula-box {
+  background: #fef9c3 !important;
+  border: 1.5px solid #eab308 !important;
+  border-left: 5px solid #ca8a04 !important;
+  border-radius: 4px 14px 12px 4px !important;
+  color: #172554 !important;
+  box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.1) !important;
+}
+
+html.theme-notebook [class*="bg-slate-9"],
+html.theme-notebook [class*="bg-slate-8"] {
+  background-color: #fffdf7 !important;
+  border: 1.5px dashed #64748b !important;
+  border-radius: 8px !important;
+  color: #172554 !important;
+}
+
+/* Colores de tintas reales: Azul Bic, Rojo Corrección, Verde Apunte, Grafito */
+html.theme-notebook .text-white,
+html.theme-notebook .text-slate-100,
+html.theme-notebook .text-slate-200 {
+  color: #172554 !important; /* Tinta azul oscura */
+  text-shadow: none !important;
+}
+
+html.theme-notebook .text-slate-300 {
+  color: #1e293b !important; /* Lápiz grafito 2B */
+}
+
+html.theme-notebook .text-slate-400,
+html.theme-notebook .text-slate-500 {
+  color: #475569 !important;
+}
+
+html.theme-notebook .text-amber-300,
+html.theme-notebook .text-amber-400,
+html.theme-notebook .text-rose-300,
+html.theme-notebook .text-rose-400 {
+  color: #dc2626 !important; /* Lapicero Rojo Pilot de profesor */
+}
+
+html.theme-notebook .text-sky-300,
+html.theme-notebook .text-sky-400,
+html.theme-notebook .text-blue-300,
+html.theme-notebook .text-blue-400,
+html.theme-notebook .text-indigo-300,
+html.theme-notebook .text-indigo-400 {
+  color: #1d4ed8 !important; /* Lapicero Azul brillante */
+}
+
+html.theme-notebook .text-emerald-200,
+html.theme-notebook .text-emerald-300,
+html.theme-notebook .text-emerald-400 {
+  color: #15803d !important; /* Lapicero Verde */
+}
+
+html.theme-notebook .text-purple-300,
+html.theme-notebook .text-purple-400 {
+  color: #7e22ce !important; /* Lapicero Morado */
+}
+
+/* Títulos principales subrayados en tinta roja */
+html.theme-notebook .bg-clip-text.text-transparent {
+  background: none !important;
+  -webkit-text-fill-color: #1e3a8a !important;
+  color: #1e3a8a !important;
+  text-shadow: 2px 2px 0px rgba(220, 38, 38, 0.15) !important;
+  text-decoration: underline wavy #dc2626 2px !important;
+  text-underline-offset: 6px !important;
+}
+
+/* Efecto Resaltador Fluorescente (Stabilo Boss) en todas las cajas coloreadas */
+html.theme-notebook [class*="bg-amber-9"],
+html.theme-notebook [class*="bg-amber-500/"] {
+  background: #fef08a !important;
+  border: 1.5px solid #eab308 !important;
+  color: #713f12 !important;
+}
+
+html.theme-notebook [class*="bg-emerald-9"],
+html.theme-notebook [class*="bg-emerald-500/"] {
+  background: #bbf7d0 !important;
+  border: 1.5px solid #16a34a !important;
+  color: #14532d !important;
+}
+
+html.theme-notebook [class*="bg-rose-9"],
+html.theme-notebook [class*="bg-rose-500/"] {
+  background: #fecdd3 !important;
+  border: 1.5px solid #dc2626 !important;
+  color: #881337 !important;
+}
+
+html.theme-notebook [class*="bg-purple-9"],
+html.theme-notebook [class*="bg-indigo-9"],
+html.theme-notebook [class*="bg-blue-9"],
+html.theme-notebook [class*="bg-sky-9"],
+html.theme-notebook [class*="bg-purple-500/"],
+html.theme-notebook [class*="bg-indigo-500/"],
+html.theme-notebook [class*="bg-blue-500/"],
+html.theme-notebook [class*="bg-sky-500/"] {
+  background: #dbeafe !important;
+  border: 1.5px solid #2563eb !important;
+  color: #1e3a8a !important;
+}
+
+html.theme-notebook svg text[fill="#cbd5e1"],
+html.theme-notebook svg text[fill="#94a3b8"] {
+  fill: #1e293b !important;
+}
+
+html.theme-notebook .katex,
+html.theme-notebook .katex-display {
+  color: #172554 !important;
+  font-weight: 600 !important;
+}
+
+html.theme-notebook #theme-dropdown-menu {
+  background: #fdfbf4 !important;
+  border: 2px solid #1e3a8a !important;
+  box-shadow: 5px 5px 0px rgba(30, 58, 138, 0.2) !important;
+}
+html.theme-notebook .theme-opt-btn:hover {
+  background-color: #fef08a !important;
+}
+
+
+/* ==========================================================================
+   TEMA 4: PIZARRA DE AULA UNIVERSITARIA (CHALKBOARD & TIZAS PASTEL)
+   Tipografía: 'Pangolin' & 'Kalam' (Trazo de Tiza en Pizarra)
+   ========================================================================== */
+html.theme-chalkboard body {
+  font-family: 'Pangolin', 'Patrick Hand', cursive, sans-serif !important;
+  letter-spacing: 0.015em !important;
+  background-color: #162a20 !important; /* Pizarra verde mate de universidad */
+  color: #f1f5f9 !important;
+  /* Textura de polvo de tiza borrada sobre la pizarra */
+  background-image: 
+    radial-gradient(ellipse at 25% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 65%, rgba(254, 240, 138, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 80%),
+    linear-gradient(135deg, #12241b 0%, #193024 50%, #112118 100%) !important;
+}
+
+html.theme-chalkboard h1,
+html.theme-chalkboard h2,
+html.theme-chalkboard h3 {
+  font-family: 'Kalam', 'Pangolin', cursive !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-shadow: 
+    1px 1px 0px rgba(255, 255, 255, 0.25),
+    0 0 10px rgba(255, 255, 255, 0.2) !important;
+}
+
+html.theme-chalkboard h4 {
+  font-family: 'Pangolin', cursive !important;
+  color: #fef08a !important;
+  text-shadow: 0 0 6px rgba(254, 240, 138, 0.25) !important;
+}
+
+html.theme-chalkboard .font-mono {
+  font-family: 'Courier Prime', monospace !important;
+}
+
+/* Marco de madera de la pizarra en Header y Footer */
+html.theme-chalkboard header {
+  background: #101f17 !important;
+  border-bottom: 4px solid #78350f !important; /* Marco de madera */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), inset 0 -1px 0 #b45309 !important;
+}
+
+html.theme-chalkboard footer {
+  background: #101f17 !important;
+  border-top: 4px solid #78350f !important; /* Bandeja de madera para tizas */
+  box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.5), inset 0 1px 0 #b45309 !important;
+}
+
+/* Recuadros trazados con tiza a mano alzada */
+html.theme-chalkboard .glass-panel {
+  background: rgba(19, 38, 29, 0.88) !important;
+  border: 2px dashed rgba(255, 255, 255, 0.38) !important;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px !important;
+  box-shadow: 
+    inset 0 0 24px rgba(0, 0, 0, 0.35),
+    0 8px 20px rgba(0, 0, 0, 0.35) !important;
+  color: #f8fafc !important;
+}
+
+html.theme-chalkboard .glass-panel-hover:hover {
+  border-color: rgba(254, 240, 138, 0.75) !important;
+  box-shadow: 
+    inset 0 0 28px rgba(254, 240, 138, 0.06),
+    0 12px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Cajas de ecuaciones enmarcadas en tiza amarilla doble */
+html.theme-chalkboard .formula-box {
+  background: rgba(13, 27, 20, 0.92) !important;
+  border: 2px solid rgba(254, 240, 138, 0.65) !important;
+  border-radius: 12px !important;
+  color: #fef08a !important;
+  box-shadow: 
+    inset 0 0 12px rgba(0, 0, 0, 0.55),
+    0 0 8px rgba(254, 240, 138, 0.15) !important;
+}
+
+html.theme-chalkboard .bg-slate-900,
+html.theme-chalkboard .bg-slate-900\/80,
+html.theme-chalkboard .bg-slate-900\/90,
+html.theme-chalkboard .bg-slate-900\/60,
+html.theme-chalkboard .bg-slate-900\/50,
+html.theme-chalkboard .bg-slate-950,
+html.theme-chalkboard .bg-slate-950\/80,
+html.theme-chalkboard .bg-slate-950\/50 {
+  background-color: rgba(15, 31, 23, 0.9) !important;
+  border: 1px dashed rgba(255, 255, 255, 0.25) !important;
+  color: #f1f5f9 !important;
+}
+
+html.theme-chalkboard .bg-slate-800,
+html.theme-chalkboard .bg-slate-800\/50,
+html.theme-chalkboard .bg-slate-800\/60,
+html.theme-chalkboard .bg-slate-800\/80 {
+  background-color: #1f3a2c !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fef08a !important;
+}
+
+/* Paleta de Tizas Pastel (Blanca, Amarilla, Coral, Celeste, Menta) */
+html.theme-chalkboard .text-white,
+html.theme-chalkboard .text-slate-100,
+html.theme-chalkboard .text-slate-200 {
+  color: #ffffff !important;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3) !important;
+}
+
+html.theme-chalkboard .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+html.theme-chalkboard .text-slate-400 {
+  color: #bbf7d0 !important;
+}
+
+html.theme-chalkboard .text-amber-300,
+html.theme-chalkboard .text-amber-400 {
+  color: #fef08a !important; /* Tiza Amarilla */
+  text-shadow: 0 0 6px rgba(254, 240, 138, 0.35) !important;
+}
+
+html.theme-chalkboard .text-sky-300,
+html.theme-chalkboard .text-sky-400,
+html.theme-chalkboard .text-blue-300,
+html.theme-chalkboard .text-blue-400 {
+  color: #7dd3fc !important; /* Tiza Celeste */
+  text-shadow: 0 0 6px rgba(125, 211, 252, 0.35) !important;
+}
+
+html.theme-chalkboard .text-rose-300,
+html.theme-chalkboard .text-rose-400 {
+  color: #fda4af !important; /* Tiza Coral / Rosada */
+  text-shadow: 0 0 6px rgba(253, 164, 175, 0.35) !important;
+}
+
+html.theme-chalkboard .text-emerald-200,
+html.theme-chalkboard .text-emerald-300,
+html.theme-chalkboard .text-emerald-400 {
+  color: #86efac !important; /* Tiza Verde Menta */
+  text-shadow: 0 0 6px rgba(134, 239, 172, 0.35) !important;
+}
+
+html.theme-chalkboard .bg-clip-text.text-transparent {
+  background: none !important;
+  -webkit-text-fill-color: #fef08a !important;
+  color: #fef08a !important;
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.2), 0 0 14px rgba(254, 240, 138, 0.4) !important;
+}
+
+html.theme-chalkboard .katex,
+html.theme-chalkboard .katex-display {
+  color: #fef9c3 !important;
+  text-shadow: 0 0 5px rgba(254, 249, 195, 0.35) !important;
+}
+
+html.theme-chalkboard #theme-dropdown-menu {
+  background: #112219 !important;
+  border: 2px solid #78350f !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6) !important;
+}
+html.theme-chalkboard .theme-opt-btn:hover {
+  background-color: #1c3628 !important;
+}
+
+
+/* ==========================================================================
+   PRINT / PDF EXPORT STYLES (16:9 Landscape)
+   ========================================================================== */
+@media print {
+  @page {
+    size: 297mm 210mm;
+    margin: 0;
+  }
+
+  html, body {
+    width: 297mm !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  header, footer, #btn-prev, #btn-next, #btn-fullscreen, .btn-df-chi, .btn-df, #slide-dots, .nav-tooltip, #btn-print-pdf, #theme-selector-wrapper {
+    display: none !important;
+  }
+
+  .slide-container {
+    height: auto !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  .slide {
+    position: relative !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    max-height: 210mm !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 18mm 20mm !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  html.theme-dark .slide {
+    background: #090d16 !important;
+    color: #f8fafc !important;
+  }
+
+  html.theme-light .slide {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  html.theme-notebook .slide {
+    background-color: #fdfbf4 !important;
+    color: #1e3a8a !important;
+    background-image: 
+      linear-gradient(90deg, transparent 44px, rgba(220, 38, 38, 0.4) 44px, rgba(220, 38, 38, 0.4) 46px, transparent 46px, transparent 50px, rgba(220, 38, 38, 0.25) 50px, rgba(220, 38, 38, 0.25) 51px, transparent 51px),
+      linear-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, 0.15) 1px, transparent 1px) !important;
+    background-size: 100% 100%, 22px 22px, 22px 22px !important;
+  }
+
+  html.theme-chalkboard .slide {
+    background-color: #162a20 !important;
+    color: #f1f5f9 !important;
+    background-image: linear-gradient(135deg, #12241b 0%, #193024 50%, #112118 100%) !important;
+  }
+
+  /* Encabezado institucional UNAMBA en cada página impresa */
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: 5mm;
+    left: 16mm;
+    width: 48mm;
+    height: 11mm;
+    background-image: url("logo_unamba.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    z-index: 20;
+  }
+
+  .slide.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .glass-panel, .formula-box, .bg-slate-900, .bg-slate-950 {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
